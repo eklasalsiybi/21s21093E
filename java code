@@ -1,0 +1,87 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class Patient {
+    private String name;
+    private int age;
+    private String condition;
+
+    public Patient(String name, int age, String condition) {
+        this.name = name;
+        this.age = age;
+        this.condition = condition;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getCondition() {
+        return condition;
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + ", Age: " + age + ", Condition: " + condition;
+    }
+}
+
+public class PatientTracker {
+    private static List<Patient> patients = new ArrayList<>();
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("Patient Tracker Application");
+            System.out.println("1. Add Patient");
+            System.out.println("2. View Patients");
+            System.out.println("3. Exit");
+            System.out.print("Choose an option: ");
+            int option = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (option) {
+                case 1:
+                    addPatient();
+                    break;
+                case 2:
+                    viewPatients();
+                    break;
+                case 3:
+                    System.out.println("Exiting the application...");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        }
+    }
+
+    private static void addPatient() {
+        System.out.print("Enter patient name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter patient age: ");
+        int age = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        System.out.print("Enter patient condition: ");
+        String condition = scanner.nextLine();
+
+        patients.add(new Patient(name, age, condition));
+        System.out.println("Patient added successfully.");
+    }
+
+    private static void viewPatients() {
+        if (patients.isEmpty()) {
+            System.out.println("No patients found.");
+        } else {
+            System.out.println("Patient List:");
+            for (Patient patient : patients) {
+                System.out.println(patient);
+            }
+        }
+    }
+}
